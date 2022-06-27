@@ -31,7 +31,7 @@ const generateKeyPair = (opts) => new Promise((resolve, reject) => {
     })
   })
 
-  const makeAuthSignature = async (privateKey, secret) => {
+const makeAuthSignature = async (privateKey, secret) => {
     const message = 'Login Request ' + Date.now()
     const md = MD.sha1.create();
     md.update(message, 'utf8');
@@ -61,9 +61,9 @@ const genPair = async() => {
     console.log("privateKeyPem ", privateKeyPem)
 
 }
-//genPair();
 
-const register = async(password) => {
+
+const register = async() => {
 
     const _password = Math.floor((Math.random() * 10000000) + 1);
     //var password = 100;
@@ -78,7 +78,7 @@ const register = async(password) => {
     return _password;
 
 }
-//register();
+
 
 const login = async(password) => {
     
