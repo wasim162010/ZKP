@@ -8,6 +8,8 @@ const MD = forge.md
 var LocalStorage = require('node-localstorage').LocalStorage;
 LocalStorage = new LocalStorage('./scratch')
 
+var keyStore = {};
+
 const makeKeyPair = () => generateKeyPair({ bits: 2048 })
 
 const makePublicKeyPem = (publicKey) => PKI.publicKeyToPem(publicKey)
@@ -66,10 +68,11 @@ const genPair = async() => {
 const register = async() => {
 
     const _password = Math.floor((Math.random() * 10000000) + 1);
-    //var password = 100;
     const { publicKey, privateKey } = await makeKeyPair()
     console.log("privateKey", privateKey)
     const publicKeyPem = makePublicKeyPem(publicKey)
+    keyStore[_password] = publicKeyPem;
+     
     const encryptedPrivateKey = encryptPrivateKey(privateKey, _password.toString())
 
     console.log("encryptedPrivateKey", encryptedPrivateKey)
@@ -93,7 +96,22 @@ const login = async(password) => {
       if (!privateKey) {
           return null
       }
-  
+
+      //
+      // make public key from private key 
+      const pub3 = forge.pki.rsa.setPublicKey(privateKey.n, privateKey.e);
+      console.log("pub3 ", pub3)
+      const publicKeyPem = makePublicKeyPem(pub3)
+      console.log("publicKeyPem ", publicKeyPem)
+      const pubFromStore =keyStore[password];
+      console.log("pubFromStore ", pubFromStore)
+      if(publicKeyPem == pubFromStore) {
+        console.log("successful auth")
+      } else {
+        return null;
+      }
+      //
+
       const [message, signature] = await makeAuthSignature(privateKey, password)
   
       return [password, message, signature]
