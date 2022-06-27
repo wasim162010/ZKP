@@ -1,0 +1,57 @@
+<html>
+    <head>
+
+        <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+        </script>
+
+        <script type = "text/javascript" language = "javascript">
+
+            $(document).ready(function() {
+   
+                $("#registerBtn").click(function(event){
+                    console.log("register user");
+
+                    let url = "/register";
+                    console.log("register user " , url);
+                    $.post(url, function (data) {
+                                        console.log("data", data);
+                                        console.log("reisgtration done");
+                                        var msg = "Registration successful. Your password is "+ data;
+                                       // $("passwordText").val(msg)
+                                        document.getElementById('passwordText').innerHTML = msg;
+                                 })
+                });
+  
+            });//document.ready
+
+        </script>
+
+    </head>
+</html>
+<body>
+
+</body>
+
+        </script>
+
+    </head>
+
+</html>
+<body>
+    
+  
+    <center>
+
+        <div id="registerDiv">
+            <h1>Register</h1> </t>
+                </t> </t> </t> </t> </t> </t> </t>
+             <input type="button" id="registerBtn" value="Register" /> </t>
+            <!-- <span  id="passwordText">Password is</span> </t> -->
+            <br>
+            <label id = "passwordText">
+                
+            </label>
+        </div>
+    </center>
+    
+</body>
