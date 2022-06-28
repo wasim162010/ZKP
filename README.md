@@ -23,7 +23,7 @@
 
 # Libraries used : 1) node-forge for keys creation and management. 2) express-js : for a sample web app, 3) node-localstorage 4) nodemon
 
-# Assumptions :for the ease, node-localstorage is used in order to store the key.But it's must not be used in the enhanced application
+# Assumptions :for the ease, node-localstorage is used in order to store the key.But it's must not be used in the enhanced/prod application.It is just used in the sample/MVP application.
 
 # Screenshots :
 <img width="1683" alt="image" src="https://user-images.githubusercontent.com/47940538/176033182-70a53a0c-9999-479b-8095-5275aaa219ac.png">
